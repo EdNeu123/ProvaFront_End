@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <title>Programa de Criptografia</title>
@@ -7,15 +8,16 @@
     body {
       padding: 20px;
     }
+
     .container {
       display: flex;
-      align-items: flex-start;   
-      gap: 20px;                  
+      align-items: flex-start;
+      gap: 20px;
     }
 
     .imagem img {
       display: block;
-      max-width: 330px;         
+      max-width: 330px;
       height: auto;
     }
 
@@ -48,6 +50,7 @@
       list-style: none;
       padding-left: 0;
     }
+
     #lista-noticias li {
       background: #f1f1f1;
       margin-bottom: 6px;
@@ -60,13 +63,21 @@
     }
   </style>
 
+  <!-- 03) Você deve desenvolver um programa de criptografia para transmitir mensagens entre amigos. O programa deve ler
+uma mensagem e, em seguida, exibi-la criptografada. A criptografia consiste em:
+a) exibir todas as letras das posições pares da mensagem;
+b) exibir todas as letras das posições ímpares da mensagem.
+A Figura exibe a mensagem criptografada. O programa deve conter ainda um botão para decriptografar a mensagem, ou
+seja, retornar a mensagem original a partir do texto cifrado. -->
+
 </head>
+
 <body>
   <div class="container">
     <div class="imagem">
-      <img src="./img/News.png" alt="Notícias">
+      <img src="./img/padrao1.png" alt="Notícias">
     </div>
-  
+
     <div class="conteudo">
       <h1>Programa de Criptografia</h1>
 
@@ -76,15 +87,49 @@
         <button type="button" onclick="criptografa()">Criptografa</button>
         <button type="button" onclick="descriptografa()">Descriptografa</button>
       </div>
-  
+
       <div id="resultados"></div>
+    </div>
 
-  </div>
-  
+    <script>
 
-  <script>
-   
-  </script>
+      // Função Atbash aplicada à string s
+      function atbash(s) {
+        return s
+          .split('')                              // 1. Divide em array de caracteres
+          .map(c => {
+            const code = c.charCodeAt(0);
+            // A–Z → Z–A
+            if (code >= 65 && code <= 90)
+              return String.fromCharCode(65 + (90 - code));
+            // a–z → z–a
+            if (code >= 97 && code <= 122)
+              return String.fromCharCode(97 + (122 - code));
+            // outros caracteres ficam iguais
+            return c;
+          })
+          .join('');                               // 2. Reúne em string
+      }
+
+      // Criptografa: aplica Atbash
+      function criptografa() {
+        const msg = document.getElementById('mensagem').value;
+        const resultado = atbash(msg);
+        document.getElementById('resultados').textContent =
+          'Mensagem criptografada com sucesso: ' + resultado;
+      }
+
+      // Descriptografa: aplica Atbash (mesma função, pois Atbash é involutiva)
+      function descriptografa() {
+        const msg = document.getElementById('mensagem').value;
+        const resultado = atbash(msg);
+        document.getElementById('resultados').textContent =
+          'Mensagem descriptografada com sucesso: ' + resultado;
+      }
+
+
+    </script>
 
 </body>
+
 </html>
