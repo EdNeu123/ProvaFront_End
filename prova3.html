@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Programa de Criptografia</title>
+  <style>
+    body {
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      align-items: flex-start;   
+      gap: 20px;                  
+    }
+
+    .imagem img {
+      display: block;
+      max-width: 330px;         
+      height: auto;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* .form-group label {
+      width: 140px;               
+      margin-right: 8px;
+      font-weight: 500;
+    } */
+
+    .form-group input {
+      flex: 1;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #info-contagem {
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    #lista-noticias {
+      list-style: none;
+      padding-left: 0;
+    }
+    #lista-noticias li {
+      background: #f1f1f1;
+      margin-bottom: 6px;
+      padding: 8px;
+      border-radius: 4px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="imagem">
+      <img src="./img/News.png" alt="Notícias">
+    </div>
+  
+    <div class="conteudo">
+      <h1>Programa de Criptografia</h1>
+
+      <div class="form-group">
+        <label for="noticia">Mensagem:</label>
+        <input type="text" id="mensagem" placeholder="proponha uma troca aqui">
+        <button type="button" onclick="criptografa()">Criptografa</button>
+        <button type="button" onclick="descriptografa()">Descriptografa</button>
+      </div>
+  
+      <div id="resultados"></div>
+
+  </div>
+  
+
+  <script>
+   
+  </script>
+
+</body>
+</html>

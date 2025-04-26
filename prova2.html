@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Ultimas Noticias</title>
+  <style>
+    body {
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      align-items: flex-start;   
+      gap: 20px;                  
+    }
+
+    .imagem img {
+      display: block;
+      max-width: 330px;         
+      height: auto;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* .form-group label {
+      width: 140px;               
+      margin-right: 8px;
+      font-weight: 500;
+    } */
+
+    .form-group input {
+      flex: 1;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #info-contagem {
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    #lista-noticias {
+      list-style: none;
+      padding-left: 0;
+    }
+    #lista-noticias li {
+      background: #f1f1f1;
+      margin-bottom: 6px;
+      padding: 8px;
+      border-radius: 4px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="imagem">
+      <img src="./img/News.png" alt="Notícias">
+    </div>
+  
+    <div class="conteudo">
+      <h1>Últimas Notícias</h1>
+
+      <div class="form-group">
+        <label for="noticia">noticia:</label>
+        <input type="text" id="input-noticia" placeholder="Digite a notícia aqui">
+        <button type="button" onclick="adicionarNoticia()">Adicionar</button>
+        <button type="button" onclick="listarNoticias()">Listar Últimas</button>
+      </div>
+  
+      <div id="info-contagem">Notícias cadastradas: 0</div>
+      <ul id="lista-noticias"></ul>
+    </div>
+  </div>
+  
+
+  <script>
+    // vetor que armazena todas as notícias
+    const noticias = [];
+
+    // atualiza o texto que mostra a contagem
+    function atualizarContagem() {
+      document.getElementById('info-contagem')
+        .textContent = `Notícias cadastradas: ${noticias.length}`;
+    }
+
+    // adiciona uma notícia ao vetor e atualiza a contagem
+    function adicionarNoticia() {
+      const campo = document.getElementById('input-noticia');
+      const texto = campo.value.trim();
+
+      if (!texto) {
+        alert('Informe uma notícia válida.');
+        return;
+      }
+
+      noticias.push(texto);
+      campo.value = '';
+      atualizarContagem();
+    }
+
+    function listarNoticias() {
+  if (noticias.length === 0) {
+    alert('Não há notícias cadastradas.');
+    return;
+  }
+
+  // limpa lista anterior
+  const ul = document.getElementById('lista-noticias');
+  ul.innerHTML = '';
+
+  // lista todas as notícias na ordem em que foram inseridas
+  noticias.forEach(noticia => {
+    const li = document.createElement('li');
+    li.textContent = noticia;
+    ul.appendChild(li);
+  });
+}
+  </script>
+
+</body>
+</html>

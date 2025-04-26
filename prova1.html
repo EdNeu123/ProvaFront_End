@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Revenda de Veículos</title>
+  <style>
+    body {
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      align-items: flex-start;   
+      gap: 20px;                  
+    }
+
+    .imagem img {
+      display: block;
+      max-width: 330px;         
+      height: auto;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-group label {
+      width: 140px;               
+      margin-right: 8px;
+      font-weight: 500;
+    }
+
+    .form-group input {
+      flex: 1;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #resultados {
+      margin-top: 24px;
+    }
+    .resultado-item {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="imagem">
+      <img src="./img/carro.png" alt="Carro">
+    </div>
+
+    <form onsubmit="verInformacoes(); return false;">
+      <h1>Revenda Herbie - Consignados</h1>
+
+      <div class="form-group">
+        <label for="veiculo">Modelo do Veículo:</label>
+        <input type="text" id="veiculo" placeholder="Insira o modelo do veículo">
+      </div>
+
+      <div class="form-group">
+        <label for="Ano">Ano de Fabricação:</label>
+        <input type="number" id="Ano" placeholder="Ex: 2012">
+      </div>
+
+      <div class="form-group">
+        <label for="preco">Preço Proprietário R$:</label>
+        <input type="number" id="preco" placeholder="Ex: 17000.00">
+      </div>
+
+      <button type="submit">Classificar / Calcular Preço</button>
+      <div id="resultados"></div>
+    </form>
+  </div>
+
+  <script>
+    function verInformacoes() {
+      const veiculo = document.getElementById("veiculo").value.trim();
+      const preco = parseFloat(document.getElementById("preco").value);
+      const ano = parseInt(document.getElementById("Ano").value);
+
+      const resultados = document.getElementById("resultados");
+      resultados.innerHTML = "";  // limpa resultados antigos
+
+      if (!veiculo || isNaN(preco) || preco <= 0 || isNaN(ano) || ano <= 0) {
+        alert("Preencha corretamente os campos!");
+        return;
+      }
+
+      const anoAtual = new Date().getFullYear();
+      const idade = anoAtual - ano;
+
+      let classificacao = "Usado";
+      if (idade === 0) classificacao = "Novo";
+      else if (idade <= 2) classificacao = "Seminovo";
+
+      const acrescimo = (classificacao === "Novo") ? 0.08 : 0.10;
+      const precoVenda = preco * (1 + acrescimo);
+
+      const p = document.createElement("p");
+      p.classList.add("resultado-item");
+      p.innerHTML = `
+        ${veiculo} - ${classificacao}<br>
+        Preço de Venda R$ ${precoVenda.toFixed(2)}
+      `;
+      resultados.appendChild(p);
+    }
+  </script>
+
+</body>
+</html>
